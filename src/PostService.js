@@ -22,6 +22,15 @@ class PostService {
         });
     }
 
+    //Register New User
+    static RegisterNewUser(email, username, password){
+        return axios.post(url, {
+            email
+            //username,
+            //password
+        });
+    }
+
     //Create Post
     static insertPost(text) {
         return axios.post(url, {

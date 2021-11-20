@@ -57,6 +57,7 @@
       items: [
           { title: 'Dashboard', icon: 'mdi-view-dashboard', to: '/' },
           { title: 'Login', icon: 'mdi-account', to: '/Login'},
+          { title: 'Map', icon: 'mdi-map', to: '/Map'},
           { title: 'About', icon: 'mdi-help-box', to: '/About' },
           { title: 'Some Stuff', icon: 'mdi-alert-octagram', to: '/Stuff'}
         ] }),
