@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'http://localhost:5001/api/posts';
+const url = 'http://localhost:5001/api/users';
 
 class PostService {
     //Get Posts
@@ -22,16 +22,20 @@ class PostService {
         });
     }
 
-    //Create Post
-    static insertPost(text) {
+    //Register New User
+    static RegisterNewUser(email, username, password){
         return axios.post(url, {
-            text
+            email
+            //username,
+            //password
         });
     }
 
-    //Delete Post
-    static deletePost(id){
-        return axios.delete(`${url}${id}`);
+    //Create Post
+    static insertUser(text) {
+        return axios.post(url, {
+            text
+        });
     }
 }
 
