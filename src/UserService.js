@@ -1,8 +1,9 @@
 import axios from 'axios';
 
-const url = 'http://localhost:5001/api/users';
+const RegisterUserUrl = 'http://localhost:5001/api/users/RegisterUser';
+const LoginUserUrl = 'http://localhost:5001/api/users/LoginUser';
 
-class PostService {
+class UserService {
     //Get Posts
     static getPosts(){
         return new Promise(async (resolve, reject) => {
@@ -24,19 +25,19 @@ class PostService {
 
     //Register New User
     static RegisterNewUser(email, username, password){
-        return axios.post(url, {
-            email
-            //username,
-            //password
+        const myreg = email+"#"+username+"#"+password;
+        return axios.post(RegisterUserUrl, {
+            myreg
         });
     }
 
-    //Create Post
-    static insertUser(text) {
-        return axios.post(url, {
-            text
+    //Login User
+    static LoginUser(username, password) {
+        const mylogin = username+"#"+password;
+        return axios.post(LoginUserUrl, {
+            mylogin
         });
     }
 }
 
-export default PostService;
+export default UserService;

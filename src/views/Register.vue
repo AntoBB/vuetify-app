@@ -4,7 +4,7 @@
         <v-card-title>Register new User</v-card-title>
         <v-card-text>
           <v-text-field label="Username" v-model='username' prepend-icon="mdi-account-circle"/>
-          <v-text-field label="email" v-model='email' prepend-icon="mdi-at"/>
+          <v-text-field label="email" v-model="email" prepend-icon="mdi-at"/>
           <v-text-field 
           label="Password" 
           :type="showPassword ? 'text' : 'password'"
@@ -17,7 +17,7 @@
         <v-divider></v-divider>
         <v-card-actions>
           <v-btn color="success" 
-          @click="insertUser">Register</v-btn>
+          @click="insertNewUser">Register</v-btn>
           <v-btn color="info">Login</v-btn>
         </v-card-actions>
       </v-card>
@@ -26,6 +26,8 @@
 
 <script>
 import UserService from '../UserService'
+var Toasted = require('vue-toasted').default
+
 
 export default {
   data()
@@ -38,10 +40,46 @@ export default {
     }
   },
   methods: {
-    async insertUser() {
-      console.log(this.email+"#"+this.username+"#"+this.password);
-      //await UserService.RegisterNewUser(this.email, this.username, this.password);
-      await UserService.RegisterNewUser(email);
+    async insertNewUser() {
+      await UserService.RegisterNewUser(this.email, this.username, this.password).then(response => {
+            console.log('status: ', response.status);
+
+                switch (response.status) {
+                    case 200:
+                        console.log('good to go!');
+                        break;
+                    case 201:
+                        console.log('user created!');
+                        let oktoast = this.$toasted.show("Registration Complete", { 
+                          theme: "bubble", 
+                          type: "success",
+                          position: "bottom-right", 
+                          duration : 3000
+                        });
+                        break;
+                    case 400:
+                        console.log('400 error');  // not getting here
+                        break;
+                    case 401:
+                        console.log('401 error');  // or here
+                        break;
+                    case 404:
+                        console.log('401 error');  // or here
+                        let errtoast = this.$toasted.show("Failed to Register", { 
+                          theme: "bubble", 
+                          type: "error",
+                          position: "bottom-right", 
+                          duration : 3000
+                        });
+                        break;
+                    default:
+                        console.log('some other error');  // end up here all the time
+                        break;
+                    }
+        })
+        .catch(error => {
+            console.log('SignInForm.authenticate error: ', error);
+        });
     }
   }
 }
