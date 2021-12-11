@@ -44,59 +44,7 @@
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>NDO Application</v-toolbar-title>
       <v-spacer></v-spacer>
-            <v-menu
-        bottom
-        min-width="200px"
-        rounded
-        offset-y
-      >
-        <template v-slot:activator="{ on }">
-          <v-btn
-            icon
-            x-large
-            v-on="on"
-          >
-            <v-avatar
-              color="brown"
-              size="48"
-            >
-              <span class="white--text text-h5">{{ user.initials }}</span>
-            </v-avatar>
-          </v-btn>
-        </template>
-        <v-card>
-          <v-list-item-content class="justify-center">
-            <div class="mx-auto text-center">
-              <v-avatar
-                color="brown"
-              >
-                <span class="white--text text-h5">{{ user.initials }}</span>
-              </v-avatar>
-              <h3>{{ user.fullName }}</h3>
-              <p class="text-caption mt-1">
-                {{ user.email }}
-              </p>
-              <v-divider class="my-3"></v-divider>
-              <v-btn 
-              v-on:click="openLoginPage()"
-                depressed
-                rounded
-                text
-              >
-                Login
-              </v-btn>
-              <v-divider class="my-3"></v-divider>
-              <!--<v-btn
-                depressed
-                rounded
-                text
-              >
-                Disconnect
-              </v-btn>-->
-            </div>
-          </v-list-item-content>
-        </v-card>
-      </v-menu>
+      <avatar />
     </v-app-bar>
 
     <v-main>
@@ -107,13 +55,14 @@
 
 <script>
 import About from './views/About.vue'
+import avatar from './components/Avatar.vue'
+
   export default {
+    components: {
+    avatar,
+  },
     data: () => ({ 
-      user: {
-        initials: 'O',
-        fullName: 'Ospite',
-        //email: 'john.doe@doe.com',
-      },
+      
       //components: {
       //  'about': About,
       //},
