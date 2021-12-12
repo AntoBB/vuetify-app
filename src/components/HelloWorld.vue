@@ -11,8 +11,9 @@
       </v-col>
       <v-col class="mb-4">
         <h1 class="display-2 font-weight-bold mb-3">
-          Hello
+          Welcome
         </h1>
+        <router-link v-if="!isLoggedIn" to="/login"><button>Login</button></router-link>
       </v-col>
 
       <v-col
@@ -29,9 +30,12 @@
 </template>
 
 <script>
+  import { mapGetters } from "vuex";
   export default {
     name: 'HelloWorld',
-
+    computed: {
+    ...mapGetters(["isLoggedIn"])
+    },
     data: () => ({
       ecosystem: [
         {
