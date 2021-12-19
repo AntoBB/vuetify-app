@@ -13,7 +13,7 @@
         <h1 class="display-2 font-weight-bold mb-3">
           Welcome
         </h1>
-        <router-link v-if="!isLoggedIn" to="/login"><button>Login</button></router-link>
+        <router-link v-if="!isLoggedIn" to="/Login"><button>Login</button></router-link>
       </v-col>
 
       <v-col
