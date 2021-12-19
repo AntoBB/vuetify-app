@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 Vue.use(Vuex)
+Vue.config.productionTip = false;
 
 export default new Vuex.Store({
   state: {
@@ -17,5 +18,9 @@ export default new Vuex.Store({
     },
   },
   actions: {},
-  getters: {},
+  getters: {
+    isLoggedIn(state) {
+    return !!state.token;
+    },
+  },
 });
