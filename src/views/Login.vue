@@ -60,8 +60,8 @@ export default {
         }),
       });
       const { user, mytoken } = await response.json();
-      // console.log(user);
-      // console.log(token);
+      console.log(user);
+      console.log(mytoken);
       this.setUser(user);
       this.setToken(mytoken);
       this.$router.push("/");
