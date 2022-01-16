@@ -64,7 +64,9 @@ export default {
       console.log(mytoken);
       this.setUser(user);
       this.setToken(mytoken);
+      globalThis.vm.$forceUpdate();
       this.$router.push("/");
+      
     },
 
     async UserLogin() {
