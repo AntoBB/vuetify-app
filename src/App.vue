@@ -44,17 +44,16 @@
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>NDO Application</v-toolbar-title>
       <v-spacer></v-spacer>
-      <avatar />
+      <avatar v-if="renderKey"/>
     </v-app-bar>
 
     <v-main>
-      <router-view></router-view>
+      <router-view v-if="renderKey"/>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import About from './views/About.vue'
 import avatar from './components/Avatar.vue'
 
   export default {
@@ -63,21 +62,27 @@ import avatar from './components/Avatar.vue'
   },
     data: () => ({ 
       
-      //components: {
-      //  'about': About,
-      //},
+      renderKey : true,
       drawer: null,
       items: [
           { title: 'Dashboard', icon: 'mdi-view-dashboard', to: '/' },
-          { title: 'Login', icon: 'mdi-account', to: '/Login'},
           { title: 'Map', icon: 'mdi-map', to: '/Map'},
           { title: 'About', icon: 'mdi-help-box', to: '/About' },
           { title: 'Some Stuff', icon: 'mdi-alert-octagram', to: '/Stuff'}
         ] }),
+        created() {
+          this.$root.$refs.MyApp = this;
+        },
         methods: {
           async openLoginPage() {
             this.$router.push('/Login');
             //this.$router.push({name:'home', params: {id: '[paramdata]'}}); 
+          },
+          reRender(){
+            this.renderKey = false;
+            this.$nextTick(()=>{
+            this.renderKey = true;
+            }); 
           }
         }
   }

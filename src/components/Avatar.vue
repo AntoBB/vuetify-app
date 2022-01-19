@@ -86,6 +86,10 @@ export default {
           async logout() {
             console.log(localStorage.getItem('isLogged'));
             console.log(typeof(localStorage.getItem('isLogged')));
+            localStorage.setItem('user', JSON.stringify({"username":"Ospite", "name":"Ospite"}));
+            localStorage.setItem('initials', 'O');
+            localStorage.setItem('isLogged', false);
+            this.$root.$refs.MyApp.reRender();
             //this.$router.push('/Login');
             //this.$router.push({name:'home', params: {id: '[paramdata]'}}); 
           }

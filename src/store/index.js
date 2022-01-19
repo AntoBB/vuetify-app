@@ -41,7 +41,7 @@ export default new Vuex.Store({
   actions: {},
   getters: {
     isLoggedIn(state) {
-    return state.isLogged;
+      return state.isLogged;
     },
   },
 });

@@ -29,6 +29,7 @@
 <script>
 import UserService from '../UserService'
 import { mapMutations } from "vuex";
+import reRender from "../App.vue";
 var Toasted = require('vue-toasted').default
 
 export default {
@@ -64,7 +65,9 @@ export default {
       console.log(mytoken);
       this.setUser(user);
       this.setToken(mytoken);
-      globalThis.vm.$forceUpdate();
+      //globalThis.vm.$forceUpdate();
+      //this.reRender();
+      this.$root.$refs.MyApp.reRender();
       this.$router.push("/");
       
     },

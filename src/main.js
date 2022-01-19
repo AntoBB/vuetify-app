@@ -8,7 +8,7 @@ import Toasted from 'vue-toasted';
 
 Vue.config.productionTip = false
 
-var app = new Vue({
+new Vue({
   router,
   store,
   beforeCreate() { this.$store.commit('initialiseStore');},
@@ -39,5 +39,3 @@ Vue.use(GmapVue, {
   //// If you want to automatically install all the components this property must be set to 'true':
   installComponents: true
 })
-
-global.vm = app; //Define your app variable globally
