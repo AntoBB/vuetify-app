@@ -32,22 +32,34 @@
                 {{ user.email }}
               </p>
               <v-divider class="my-3"></v-divider>
-              <v-btn 
-              v-on:click="openLoginPage()"
-                depressed
-                rounded
-                text
-              >
-                Login
-              </v-btn>
+              <v-list-item-content>
+                <v-btn v-if="user.isLoggedIn === true"
+                  depressed
+                  rounded
+                  text
+                >
+                  Profilo
+                </v-btn>
+                <v-btn v-if="user.isLoggedIn === true"
+                  v-on:click="logout()"
+                  depressed
+                  rounded
+                  text
+                >
+                  Logout
+                </v-btn>
+
+                <v-btn v-else
+                v-on:click="openLoginPage()"
+                  depressed
+                  rounded
+                  text
+                >
+                  Login
+                </v-btn>
+              </v-list-item-content>
               <v-divider class="my-3"></v-divider>
-              <!--<v-btn
-                depressed
-                rounded
-                text
-              >
-                Disconnect
-              </v-btn>-->
+              
             </div>
           </v-list-item-content>
         </v-card>
@@ -59,14 +71,26 @@ export default {
   name: "avatar",
   data: () => ({ 
       user: {
-        initials: 'O',
-        fullName: 'Ospite',
+        initials: localStorage.getItem('initials'),
+        fullName: (JSON.parse(localStorage.getItem('user'))).name,
+        isLoggedIn: String(localStorage.getItem('isLogged')) == "true",
+        renderMyComponent : true
         //email: 'john.doe@doe.com',
       },
   }),
   methods: {
           async openLoginPage() {
             this.$router.push('/Login');
+            //this.$router.push({name:'home', params: {id: '[paramdata]'}}); 
+          },
+          async logout() {
+            console.log(localStorage.getItem('isLogged'));
+            console.log(typeof(localStorage.getItem('isLogged')));
+            localStorage.setItem('user', JSON.stringify({"username":"Ospite", "name":"Ospite"}));
+            localStorage.setItem('initials', 'O');
+            localStorage.setItem('isLogged', false);
+            this.$root.$refs.MyApp.reRender();
+            //this.$router.push('/Login');
             //this.$router.push({name:'home', params: {id: '[paramdata]'}}); 
           }
         }

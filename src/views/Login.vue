@@ -19,6 +19,8 @@
           @click="OpenRegisterTab">Register</v-btn>
           <v-btn color="info"
           @click="UserLogin">Login</v-btn>
+          <v-btn color="info"
+          @click="login">New Login</v-btn>
         </v-card-actions>
       </v-card>
     </v-content>
@@ -26,6 +28,8 @@
 
 <script>
 import UserService from '../UserService'
+import { mapMutations } from "vuex";
+import reRender from "../App.vue";
 var Toasted = require('vue-toasted').default
 
 export default {
@@ -41,8 +45,35 @@ export default {
     async OpenRegisterTab() {
       this.$router.push('/Register'); 
     },
+
+    ...mapMutations(["setUser", "setToken"]),
+    
+    async login(e) {
+      e.preventDefault();
+      const response = await fetch("http://localhost:5001/api/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: this.username,
+          password: this.password,
+        }),
+      });
+      const { user, mytoken } = await response.json();
+      console.log(user);
+      console.log(mytoken);
+      this.setUser(user);
+      this.setToken(mytoken);
+      //globalThis.vm.$forceUpdate();
+      //this.reRender();
+      this.$root.$refs.MyApp.reRender();
+      this.$router.push("/");
+      
+    },
+
     async UserLogin() {
-     await UserService.LoginUser(this.username, this.password).then(response => {
+     await UserService.LoginUrl(this.username, this.password).then(response => {
             console.log('status: ', response.status);
 
                 switch (response.status) {

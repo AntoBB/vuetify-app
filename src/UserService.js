@@ -3,6 +3,7 @@ import axios from 'axios';
 const RegisterUserUrl = 'http://localhost:5001/api/users/RegisterUser';
 const LoginUserUrl = 'http://localhost:5001/api/users/LoginUser';
 const myLoginUrl = 'http://localhost:5001/api/users/LoginUrl';
+const _login = 'http://localhost:5001/api/users/login';
 
 const jwt = require("jsonwebtoken");
 
@@ -45,7 +46,7 @@ class UserService {
     //Login User
     static LoginUrl(username, password) {
         //const mylogin = username+"#"+password;
-        console.log("UserService.LoginUrl: creo token")
+        console.debug("UserService.LoginUrl: creo token")
         const token = jwt.sign(
             { user_id: user._id, email },
             process.env.TOKEN_KEY,
