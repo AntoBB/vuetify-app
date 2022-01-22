@@ -74,8 +74,8 @@ export default {
         initials: localStorage.getItem('initials'),
         fullName: (JSON.parse(localStorage.getItem('user'))).name,
         isLoggedIn: String(localStorage.getItem('isLogged')) == "true",
-        renderMyComponent : true
-        //email: 'john.doe@doe.com',
+        renderMyComponent : true,
+        email: 'john.doe@doe.com',
       },
   }),
   methods: {
