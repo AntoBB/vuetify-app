@@ -75,7 +75,7 @@ export default {
         fullName: (JSON.parse(localStorage.getItem('user'))).name,
         isLoggedIn: String(localStorage.getItem('isLogged')) == "true",
         renderMyComponent : true,
-        email: 'john.doe@doe.com',
+        email: String(localStorage.getItem('email')),
       },
   }),
   methods: {
@@ -89,6 +89,7 @@ export default {
             localStorage.setItem('user', JSON.stringify({"username":"Ospite", "name":"Ospite"}));
             localStorage.setItem('initials', 'O');
             localStorage.setItem('isLogged', false);
+            localStorage.setItem('email', '');
             this.$root.$refs.MyApp.reRender();
             //this.$router.push('/Login');
             //this.$router.push({name:'home', params: {id: '[paramdata]'}}); 

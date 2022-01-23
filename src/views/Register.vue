@@ -40,7 +40,40 @@ export default {
     }
   },
   methods: {
-    async insertNewUser() {
+    async insertNewUser(e){
+      e.preventDefault();
+      const response = await fetch("http://localhost:5001/api/users/RegisterUser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: this.username,
+          password: this.password,
+          email: this.email,
+        }),
+      });
+      switch (response.status) {
+        case 200:
+          let successToast = this.$toasted.show("Registration Complete", { 
+            theme: "bubble", 
+            type: "success",
+            position: "bottom-right", 
+            duration : 2500
+          });
+          break;
+        case 403:
+          //console.log('403 error');  // not getting here
+          let errToast = this.$toasted.show("Registration Failed", { 
+            theme: "bubble", 
+            type: "error",
+            position: "bottom-right", 
+            duration : 2500
+          });
+          break;
+      }
+    },
+    async _insertNewUser() {
       await UserService.RegisterNewUser(this.email, this.username, this.password).then(response => {
             console.log('status: ', response.status);
 

@@ -23,42 +23,13 @@ class UserService {
             } catch(err) {
                 reject(err);
             }
-
         });
     }
-
     //Register New User
     static RegisterNewUser(email, username, password){
         const myreg = email+"#"+username+"#"+password;
         return axios.post(RegisterUserUrl, {
             myreg
-        });
-    }
-
-    //Login User
-    static LoginUser(username, password) {
-        const mylogin = username+"#"+password;
-        return axios.post(LoginUserUrl, {
-            mylogin
-        });
-    }
-
-    //Login User
-    static LoginUrl(username, password) {
-        //const mylogin = username+"#"+password;
-        console.debug("UserService.LoginUrl: creo token")
-        const token = jwt.sign(
-            { user_id: user._id, email },
-            process.env.TOKEN_KEY,
-            {
-              expiresIn: "2h",
-            }
-          );
-          console.log(token)
-        return axios.post(myLoginUrl, {
-            username,
-            password,
-            token 
         });
     }
 }
