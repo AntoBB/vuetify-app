@@ -53,6 +53,7 @@ export default {
           email: this.email,
         }),
       });
+      console.log('status: ', response.body);
       switch (response.status) {
         case 200:
           let successToast = this.$toasted.show("Registration Complete", { 
@@ -62,9 +63,16 @@ export default {
             duration : 2500
           });
           break;
+        case 402:
+          let _errUsernameToast = this.$toasted.show("Username already exist", { 
+            theme: "bubble", 
+            type: "error",
+            position: "bottom-right", 
+            duration : 2500
+          });
+          break;
         case 403:
-          //console.log('403 error');  // not getting here
-          let errToast = this.$toasted.show("Registration Failed", { 
+          let _errEmailToast = this.$toasted.show("Email exist. Please login with your mail", { 
             theme: "bubble", 
             type: "error",
             position: "bottom-right", 
@@ -73,47 +81,6 @@ export default {
           break;
       }
     },
-    async _insertNewUser() {
-      await UserService.RegisterNewUser(this.email, this.username, this.password).then(response => {
-            console.log('status: ', response.status);
-
-                switch (response.status) {
-                    case 200:
-                        console.log('good to go!');
-                        break;
-                    case 201:
-                        console.log('user created!');
-                        let oktoast = this.$toasted.show("Registration Complete", { 
-                          theme: "bubble", 
-                          type: "success",
-                          position: "bottom-right", 
-                          duration : 3000
-                        });
-                        break;
-                    case 400:
-                        console.log('400 error');  // not getting here
-                        break;
-                    case 401:
-                        console.log('401 error');  // or here
-                        break;
-                    case 404:
-                        console.log('401 error');  // or here
-                        let errtoast = this.$toasted.show("Failed to Register", { 
-                          theme: "bubble", 
-                          type: "error",
-                          position: "bottom-right", 
-                          duration : 3000
-                        });
-                        break;
-                    default:
-                        console.log('some other error');  // end up here all the time
-                        break;
-                    }
-        })
-        .catch(error => {
-            console.log('SignInForm.authenticate error: ', error);
-        });
-    }
   }
 }
 </script>
