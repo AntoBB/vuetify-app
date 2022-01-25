@@ -91,7 +91,7 @@ export default {
             localStorage.setItem('isLogged', false);
             localStorage.setItem('email', '');
             this.$root.$refs.MyApp.reRender();
-            //this.$router.push('/Login');
+            this.$router.push('/Login');
             //this.$router.push({name:'home', params: {id: '[paramdata]'}}); 
           }
         }

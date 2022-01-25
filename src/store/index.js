@@ -8,6 +8,7 @@ export default new Vuex.Store({
   state: {
     user: null,
     initials: 'O',
+    email: '',
     token: null,
     isLogged: false
   },
@@ -30,10 +31,15 @@ export default new Vuex.Store({
       state.user = user;
       state.initials = String(state.user.username).split("")[0];
       localStorage.setItem('user', JSON.stringify(user));
-      let email = JSON.parse(localStorage.getItem('user')).email;
-      localStorage.setItem('email', email);
-      localStorage.setItem('initials', String(state.user.username).split("")[0]);
+      let _email = JSON.parse(localStorage.getItem('user')).email;
+      state.email = _email;
+      localStorage.setItem('email', _email);
+      state.initials = String(state.user.username).split("")[0]
+      localStorage.setItem('initials', String(state.initials));
       localStorage.setItem('isLogged', true);
+    },
+    getUser(){
+      return state.user
     },
     setToken(state, token) {
       state.token = token;
